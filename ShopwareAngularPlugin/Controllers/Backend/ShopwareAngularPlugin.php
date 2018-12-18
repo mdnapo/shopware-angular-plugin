@@ -3,7 +3,9 @@
 
 use Shopware\Components\CSRFWhitelistAware;
 
-
+/**
+ * Class Shopware_Controllers_Backend_ShopwareAngularPlugin
+ */
 class Shopware_Controllers_Backend_ShopwareAngularPlugin extends Enlight_Controller_Action implements CSRFWhitelistAware
 {
     public function getWhitelistedCSRFActions()

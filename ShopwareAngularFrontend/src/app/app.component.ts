@@ -11,6 +11,11 @@ export class AppComponent implements OnInit {
     constructor(private appService: AppService, private homeService: HomeService) {
     }
 
+    /**
+     * This is the best place to initiate the AppService.
+     * Because the index file will be rendered on the server-side
+     * we can be certain that the CSRF token will be available.
+     */
     ngOnInit(): void {
         this.appService.init();
     }

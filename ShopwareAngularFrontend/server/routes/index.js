@@ -1,10 +1,7 @@
 var express = require('express');
 var router = express.Router();
+var shopware_angular_router = require('./shopware_angular_plugin_app');
 
-const app_controller = 'shopware_angular_plugin_app/index';
-
-router.post(app_controller + '/home/index', function (req, res, next) {
-    res.json({success: true, msg: 'Hello World!'});
-});
+router.use('/shopware_angular_plugin_app/index', shopware_angular_router);
 
 module.exports = router;
