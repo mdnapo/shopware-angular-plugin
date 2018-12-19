@@ -1,6 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {AppService} from './services/app.service';
 import {HomeService} from './services/home.service';
+import {OrderService} from './services/order.service';
+
+export interface OrderInterface {
+    id: number;
+    number: number;
+    status: string;
+}
 
 @Component({
     selector: 'app-root',
@@ -8,7 +15,13 @@ import {HomeService} from './services/home.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    constructor(private appService: AppService, private homeService: HomeService) {
+    input_name: string | null = null;
+    msg: string | null = null;
+    orders: OrderInterface[] = [];
+
+    constructor(private appService: AppService,
+                private homeService: HomeService,
+                private orderService: OrderService) {
     }
 
     /**
@@ -21,8 +34,21 @@ export class AppComponent implements OnInit {
     }
 
     onClickMe() {
-        this.homeService.getMsg().then(data => {
-            console.log(data);
-        });
+        this.homeService.getMsg({name: this.input_name})
+            .then((data: any) => {
+                if (data.success) {
+                    this.msg = data.msg;
+                } else {
+                    console.log(data);
+                }
+            });
+        this.orderService.getAll()
+            .then((data: any) => {
+                if (data.success) {
+                    this.orders = data.orders;
+                } else {
+                    console.log(data);
+                }
+            });
     }
 }

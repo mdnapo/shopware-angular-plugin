@@ -33,10 +33,10 @@ export class AppService {
      * @param {Object} body
      * @returns {Promise<Object>}
      */
-    post(url: string, body: object = null) {
+    post(url: string, body: any = null) {
         url = this.frontControllerRoute + url;
         const _body = body ? body : {};
-        _body['__csrf_token'] = this.__csrfToken;
+        _body.__csrf_token = this.__csrfToken;
         return this.http.post(this.apiHost + url, _body).toPromise();
     }
 }

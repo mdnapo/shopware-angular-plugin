@@ -7,7 +7,7 @@ export class HomeService {
 
     }
 
-    getMsg() {
-        return this.appService.post('home/index');
+    getMsg(body: { name: string }) {
+        return this.appService.post('home/index', body);
     }
 }

@@ -5,7 +5,9 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --deploy-url=backend/shopware_angular_plugin --prod && node ./scripts/deploy-to-plugin.js",
+    "build": "ng build --prod",
+    "start-express": "cd server && npm run start",
+    "deploy-to-plugin": "ng build --prod --deploy-url=backend/shopware_angular_plugin && node ./scripts/deploy-to-plugin.js",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
