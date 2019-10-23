@@ -1,13 +1,23 @@
 <?php
 
-// This is where you specify files that should be excluded from the plugin zip
+/**
+ * This script automates creating a zip plugin zip that can be installed in the Shopware backend.
+ * To use this script follow these steps.
+ *
+ * 1. Include this script in the root of your Shopware plugin.
+ * 2. Make sure you have a valid plugin.xml at the root of your project.
+ * 3. Make sure you have a folder called build at the same level as your Shopware plugin root.
+ * 4. Add files that need to be ignored to the IGNORED_FILES array.
+ * 5. While in the root of your Shopware plugin run "php generate_zip.php".
+ * 6. Get your zipped plugin at {ShopwarePluginRoot}/../build
+ */
+
+// Use this array to specify files that should be excluded from the plugin zip.
 const IGNORED_FILES = [
-    '.git', '.gitignore',
-    'composer.json', 'composer.lock',
-    'generate_zip.php',
+    '.git', '.gitignore', 'generate_zip.php',
 ];
 
-// Set necessary directory paths and plugin name
+// Set necessary directory paths and plugin name.
 $plugin_dir = realpath(__DIR__);
 $target_dir = realpath(__DIR__ . '/../build');
 $path_parts = explode(DIRECTORY_SEPARATOR, $plugin_dir);
@@ -66,8 +76,7 @@ $zip->close();
 remove_dir_recursive($tmp_dir);
 
 // Notify user of the successful zip generation!
-echo "Plugin zip created at $zip_dir.\r\n";
-
+echo "Plugin zip created at $zip_dir.\n";
 
 // Helper function declarations
 function copy_dir_recursive($src, $dst, $permissions = 0755)
