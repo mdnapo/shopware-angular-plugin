@@ -5,29 +5,37 @@ import {environment} from '../../environments/environment';
 /**
  * This class simplifies communication between the Angular application and the backend
  * by taking care of handling the base path for all requests and adding the CSRF token.
- * Now you can make your life easy by encapsulating requests in specific services that
- * use this service, because DI is free in Angular! :D
+ * Just inject this service and delegate backend requests to the post function.
+ * Gotta love free Dependency Inject! :D
+ *
+ * The following format will be referred to in the comments.
+ *                          ||
+ *                          \/
+ * http://example.com/backend/{snake_cased_controller_name}/{snake_cased_action_name}.
  */
 @Injectable()
 export class AppService {
     private apiHost: string = environment.api_host;
-    private frontControllerRoute = 'shopware_angular_plugin_app/index/';
+    //Backend requests to plugin controller are done using url of format mentioned above.
+    //Since our front controller is named Shopware_Controllers_Backend_ShopwareAngularPluginApp and all requests are
+    //handled through the index method every request from the Angular app is sent the url below.
+    private frontControllerRoute = 'shopware_angular_plugin_app/index';
     private __csrfToken: any;
 
     constructor(private http: HttpClient) {
-
     }
 
     /**
      * Called in AppComponent.ngOnInit()
      */
     init() {
+        // Extract the inject CSRF token so we can pass it when calling the post function.
         const csrfToken: any = document.getElementById('__csrfToken');
         this.__csrfToken = csrfToken.value;
     }
 
     /**
-     * A simple wrapper function for posting requests.
+     * A simple wrapper function for posting requests to the backend.
      *
      * @param {string} url
      * @param {Object} body

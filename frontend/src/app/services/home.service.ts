@@ -4,10 +4,9 @@ import {AppService} from './app.service';
 @Injectable()
 export class HomeService {
     constructor(private appService: AppService) {
-
     }
 
-    getMsg(body: { name: string }) {
-        return this.appService.post('home/index', body);
+    greet(body: { name: string }) {
+        return this.appService.post('/home/index', body);
     }
 }

@@ -11,9 +11,11 @@ use ShopwareAngularPlugin\Controllers\App\ReturnsJson;
  * them to the controller dispatcher.
  *
  * This is done for two reasons.
- * 1. This controller provides CSRF validation.
- * 2. We don't want to be calling Shopware controllers directly from the Angular application,
- * because this could have side effects.
+ * 1. This controller provides CSRF validation for all incoming calls.
+ * 2. Shopware controllers can add and enforce unnecessary logic.
+ * 3. All requests are forced to pass data through post requests which enforces security.
+ *
+ * Using this mechanism allows us to define custom controllers which are not necessarily bound to Shopware conventions.
  */
 class Shopware_Controllers_Backend_ShopwareAngularPluginApp extends Shopware_Controllers_Backend_Application
 {
@@ -24,8 +26,8 @@ class Shopware_Controllers_Backend_ShopwareAngularPluginApp extends Shopware_Con
 
     /**
      * Required by the base class, but does not do anything.
-     *
-     * @var string
+     * This is an example of unnecessary logic that this front controller protects us from having to implement
+     * over and over.
      */
     protected $model = Shopwae\Models\Order\Order::class;
 
@@ -36,7 +38,7 @@ class Shopware_Controllers_Backend_ShopwareAngularPluginApp extends Shopware_Con
      * I know this does not look nice, but you will probably never make a
      * request like this manually because all of this is heavily simplified in
      * the AppService provided in the Angular application.
-     * Checkout the AppService here: ShopwareAngularFrontend/src/app/services/app.service.ts
+     * Checkout the AppService here: frontend/src/app/services/app.service.ts
      */
     public function indexAction()
     {
@@ -49,6 +51,11 @@ class Shopware_Controllers_Backend_ShopwareAngularPluginApp extends Shopware_Con
 
     /**
      * This function extracts the controller and action from a request.
+     * All requests will be routed to http://example.com/backend/{PluginName}/.
+     * We want to follow the simple "controller/action" convention for our Angular app request routes.
+     * To achieve this the Angular app appends its routes to example url above.
+     * Since we know the "controller/action" part will always be at the end of the route,
+     * we can simply explode the request url and take the last to values.
      *
      * @return array
      */

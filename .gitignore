@@ -1,6 +1,7 @@
-ShopwareAngularFrontend/node_modules
-ShopwareAngularFrontend/server/node_modules
-
+frontend/node_modules
+frontend/server/node_modules
+build/
+!build/.gitkeep
 ### Jetbrains .gitignore
 
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm

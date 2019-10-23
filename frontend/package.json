@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve && cd ./server && nodemon",
     "build": "ng build --prod",
     "start-express": "cd server && npm run start",
     "deploy-to-plugin": "ng build --prod --deploy-url=backend/shopware_angular_plugin && node ./scripts/deploy-to-plugin.js",
