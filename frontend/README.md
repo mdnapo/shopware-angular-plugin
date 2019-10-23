@@ -29,3 +29,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## Deploy to plugin
 
 To deploy a new build to the Shopware plugin use the following command: npm run deploy-to-plugin.
+
+## Local development
+
+When developing locally you can use the local express server by running "nodemon" inside the frontend/server folder.
+
