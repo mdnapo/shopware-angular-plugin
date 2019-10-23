@@ -33,4 +33,4 @@ To deploy a new build to the Shopware plugin use the following command: npm run 
 ## Local development
 
 When developing locally you can use the local express server by running "nodemon" inside the frontend/server folder.
-
+Another option is run "npm run start-express" from within the frontend folder.
