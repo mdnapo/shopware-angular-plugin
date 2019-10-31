@@ -7,6 +7,6 @@ export class HomeService {
     }
 
     greet(body: { name: string }) {
-        return this.appService.post('/home/index', body);
+        return this.appService.post('/home/greet', body);
     }
 }
