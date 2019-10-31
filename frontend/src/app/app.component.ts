@@ -8,8 +8,8 @@ import {HomeService} from './services/home.service';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    input_name: string | null = null;
-    msg: string | null = null;
+    name: string = '';
+    msg: string = '';
 
     constructor(private appService: AppService,
                 private homeService: HomeService) {
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     }
 
     onClickMe() {
-        this.homeService.greet({name: this.input_name})
+        this.homeService.greet({name: this.name})
             .then((data: any) => {
                 if (data.success) {
                     this.msg = data.msg;

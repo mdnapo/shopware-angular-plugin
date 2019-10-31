@@ -3,13 +3,19 @@
         <div class="col-sm-12">
             <div class="text-center">
                 <h1>Welcome to the home page!</h1>
-                <hr>
-                <h2>{{msg}}</h2>
             </div>
             <div class="text-center">
-                <button class="btn btn-primary btn-block" (click)="onClickMe()">
+                <input class="form-control" [(ngModel)]="name"/>
+                <hr>
+                <button [hidden]="name.length == 0"
+                        class="btn btn-primary btn-block" (click)="onClickMe()">
                     Click me!
                 </button>
+                <hr>
+                <div [hidden]="msg.length == 0"
+                     class="text-center">
+                    <h4>Message from server: {{msg}}</h4>
+                </div>
             </div>
         </div>
     </div>
